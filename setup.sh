@@ -80,3 +80,27 @@ then
 else
   echo "  * Already done."
 fi
+
+echo
+echo '# Setup public-ip'
+if ! [ -x "$(command -v public-ip)" ]
+then
+  npm i -g public-ip-cli
+  echo "  * public-ip is set up."
+else
+  echo "  * Already done."
+fi
+
+echo
+echo '# Setup bashrc'
+if ! grep -q 'cloud9-stuff/\.bashrc' ~/.bashrc
+then
+  cat >>~/.bashrc <<EOF
+
+source ~/environment/cloud9-stuff/.bashrc
+
+EOF
+  echo "  * .bashrc is set up."
+else
+  echo "  * Already done."
+fi
