@@ -1,2 +1,2 @@
 #!/bin/bash -e
-echo ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ec2-user@$(public-ip) -L 12000:localhost:873
+echo ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ec2-user@$(public-ip) -L 12000:localhost:873 $([ -e ~/environment/sshcmd.local ] && cat ~/environment/sshcmd.local)
