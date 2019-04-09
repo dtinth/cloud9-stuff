@@ -1,2 +1,8 @@
-#!/bin/bash -e
-echo ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ec2-user@$(public-ip) -L 12000:localhost:873 $([ -e ~/environment/sshcmd.local ] && cat ~/environment/sshcmd.local)
+#!/usr/bin/env ruby
+extra_args = []
+ARGV.each do |cur|
+  if cur =~ /^\d+$/
+    extra_args << "-L #{cur}:localhost:#{cur}"
+  end
+end
+puts ["ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ec2-user@#{`public-ip`.strip} -L 12000:localhost:873", *extra_args].join(' ')

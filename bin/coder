@@ -1,0 +1,2 @@
+#!/bin/bash -e
+exec docker run -it -p 127.0.0.1:8443:8443 -w "$PWD" -v "$PWD:$PWD" -v ~/environment/coder-home:/home/ec2-user coder --allow-http --no-auth
