@@ -1,8 +1,14 @@
 #!/usr/bin/env ruby
 extra_args = []
-ARGV.each do |cur|
+user_file = "#{ENV['HOME']}/environment/sshcmd.local"
+[
+  *(File.exist?(user_file) ? File.read(user_file).split : []),
+  *ARGV,
+].each do |cur|
   if cur =~ /^\d+$/
     extra_args << "-L #{cur}:localhost:#{cur}"
+  elsif cur =~ /^(\d+):(\d+)$/
+    extra_args << "-L #{$1}:localhost:#{$2}"
   end
 end
 puts ["ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ec2-user@#{`public-ip`.strip} -L 12000:localhost:873", *extra_args].join(' ')
