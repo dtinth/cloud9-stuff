@@ -11,4 +11,4 @@ user_file = "#{ENV['HOME']}/environment/sshcmd.local"
     extra_args << "-L #{$1}:localhost:#{$2}"
   end
 end
-puts ["ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ec2-user@#{`public-ip`.strip} -L 12000:localhost:873", *extra_args].join(' ')
+puts ["ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ec2-user@#{`public-ip`.strip}", *extra_args].join(' ')
