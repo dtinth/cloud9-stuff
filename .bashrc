@@ -14,3 +14,10 @@ alias gc='git commit -v'
 alias gaa='git add -A'
 alias ga='git add'
 alias gp='git push'
+
+# Replace Bash shell with Fish
+if [ -n "$C9_USER" ] && [ -z "$BASH_REPLACED_WITH_FISH" ]
+then
+  export BASH_REPLACED_WITH_FISH=1
+  exec fish
+fi
