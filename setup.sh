@@ -21,23 +21,12 @@ if [ ! -e "/etc/rsyncd.conf" ]
 then
   sudo ln -s "$HOME/environment/cloud9-stuff/rsyncd.conf" "/etc/rsyncd.conf"
   echo "  * Linked rsyncd configuration to /etc/rsyncd.conf."
-  sudo yum install -y xinetd
-  sudo chkconfig rsync on
+  sudo apt install -y xinetd
+  sudo service rsync start
   sudo service xinetd start
   rsync -rdt rsync://localhost
 else
   echo "  * Already done. /etc/rsyncd.conf already exists."
-fi
-
-echo
-echo '# Setup Node.js'
-if ! [ -x "$(command -v npx)" ]
-then
-  nvm install 10
-  nvm alias default 10
-  echo "  * Node.js is set up."
-else
-  echo "  * Already done. Using Node.js $(node --version)"
 fi
 
 echo
@@ -115,9 +104,10 @@ echo
 echo '# Setup fish'
 if ! [ -x "$(command -v fish)" ]
 then
-  sudo wget -O /etc/yum.repos.d/shells:fish:release:3.repo https://download.opensuse.org/repositories/shells:fish:release:3/RedHat_RHEL-6/shells:fish:release:3.repo
-  sudo yum install -y fish
-  sudo chsh -s /usr/bin/fish ec2-user
+  sudo apt-add-repository ppa:fish-shell/release-3
+  sudo apt-get update
+  sudo apt-get install -y fish
+  sudo chsh -s /usr/bin/fish ubuntu
   echo "  * fish is set up."
 else
   echo "  * Already done."
@@ -150,4 +140,14 @@ EOF
   echo "  * .bashrc is set up."
 else
   echo "  * Already done."
+fi
+
+echo
+echo '# Setup fzf'
+if ! [ -e ~/.fzf ]
+then
+  git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+  ~/.fzf/install
+else
+  echo "  * Already have fzf"
 fi
