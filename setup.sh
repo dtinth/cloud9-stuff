@@ -151,3 +151,15 @@ then
 else
   echo "  * Already have fzf"
 fi
+
+echo
+echo '# Setup neovim'
+if ! [ -x "$(command -v nvim)" ]
+then
+  sudo add-apt-repository ppa:neovim-ppa/stable
+  sudo apt-get update
+  sudo apt-get install -y neovim
+  echo "  * neovim is set up."
+else
+  echo "  * Already done."
+fi
