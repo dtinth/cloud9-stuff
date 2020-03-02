@@ -2,10 +2,10 @@
 # Source: https://docs.aws.amazon.com/cloud9/latest/user-guide/move-environment.html
 
 # Specify the desired volume size in GiB as a command-line argument. If not specified, default to 20 GiB.
-SIZE=${1:=20}
+SIZE=${1:-20}
 
 # Install the jq command-line JSON processor.
-sudo yum -y install jq
+sudo apt install -y jq
 
 # Get the ID of the envrionment host Amazon EC2 instance.
 INSTANCEID=$(curl http://169.254.169.254/latest/meta-data//instance-id)

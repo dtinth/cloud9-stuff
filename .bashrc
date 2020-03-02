@@ -1,5 +1,8 @@
 PATH="$HOME/environment/cloud9-stuff/bin:$PATH"
 
+export LC_ALL=en_US.utf8
+export LANG=en_US.utf8
+
 if [ -e ~/environment/bashrc.local ]
 then
   source ~/environment/bashrc.local
